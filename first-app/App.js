@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
 
 export default function App() {
   const [outputText, setOutputText] = useState('Open up App.js to start working on your app!');
   const [enteredGoal, setEnteredGoal] = useState('')
+  const [goals, setGoals] = useState([])
 
   const goalInputHandler = (text) => {
     setEnteredGoal(text)
   }
+
   const addGoalHandler = () => {
-    console.log(enteredGoal)
+    setGoals((currentGoals) => [...currentGoals, enteredGoal])
   }
 
   return (
@@ -23,7 +25,13 @@ export default function App() {
         <Button title="Add goal" onPress={addGoalHandler} />
       </View>
       <View style={styles.goalsContainer}>
-        <Text>List of goals...</Text>
+      <ScrollView alwaysBounceVertical={false}>
+        {goals.map((goal) => (
+          <View style={styles.goalItem} key={goal}>
+            <Text style={styles.goalText}>{goal}</Text>
+          </View>
+        ))}
+      </ScrollView>
       </View>
     </View>
   );
@@ -54,5 +62,14 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 5,
+  },
+  goalItem: {
+    margin: 8,
+    borderRadius: 6,
+    backgroundColor: '#5e0acc',
+    padding: 8,
+  },
+  goalText: {
+    color: 'white',
   },
 });
