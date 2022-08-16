@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
+import { StyleSheet, View, Button, FlatList } from 'react-native';
 
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
 
 export default function App() {
-  const [outputText, setOutputText] = useState('Open up App.js to start working on your app!');
   const [goals, setGoals] = useState([])
+  const [isModalVisible, setModalVisible] = useState(false)
 
   const addGoalHandler = (enteredGoal) => {
     setGoals((currentGoals) => [...currentGoals, { key: Math.random().toString(), text: enteredGoal }])
@@ -16,20 +16,25 @@ export default function App() {
     setGoals((currentGoals) => currentGoals.filter(goal => goal.key !== id))
   }
 
+  const startAddGoalHandler = () => {
+    setModalVisible(true)
+  }
+
+  const handleCloseGoalInput = () => {
+    setModalVisible(false)
+  }
+
   return (
     <View style={styles.container}>
-      <Text>{outputText}</Text>
-      <Button
-        title='Change Text'
-        onPress={() => setOutputText('My new text')} />
-      <GoalInput onAddGoal={addGoalHandler} />
+      <Button title='Add new goal' color='#5e0acc' onPress={startAddGoalHandler} />
+      <GoalInput visible={isModalVisible} onAddGoal={addGoalHandler} onClose={handleCloseGoalInput} />
       <View style={styles.goalsContainer}>
         <FlatList
-        data={goals}
-        renderItem={(itemData) => (
-          <GoalItem id={itemData.item.key} text={itemData.item.text} onDeleteItem={deleteGoalHandler} />
-        )}
-        alwaysBounceVertical={false} />
+          data={goals}
+          renderItem={(itemData) => (
+            <GoalItem id={itemData.item.key} text={itemData.item.text} onDeleteItem={deleteGoalHandler} />
+          )}
+          alwaysBounceVertical={false} />
       </View>
     </View>
   );
