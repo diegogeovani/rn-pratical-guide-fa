@@ -1,5 +1,16 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native'
 
+const androidContainerStyle = {
+  elevation: 2,
+};
+
+const iosButtonStyle = {
+  shadowColor: 'black',
+  shadowOffset: { width: 0, height: 2 },
+  shadowRadius: 6,
+  shadowOpacity: 0.25,
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -11,11 +22,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#72063c',
     paddingVertical: 8,
     paddingHorizontal: 16,
-    elevation: 2,
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    shadowOpacity: 0.25,
+    ...androidContainerStyle,
+    ...iosButtonStyle,
   },
   text: {
     textAlign: 'center',
@@ -27,11 +35,14 @@ const styles = StyleSheet.create({
 })
 
 export default function PrimaryButton({ children }) {
+  const handlePress = () => console.log('press')
+  const getPressableStyle = ({ pressed }) => pressed ? [styles.pressed, styles.button] : styles.button
+
   return (
     <View style={styles.container}>
       <Pressable
-        onPress={() => console.log('press')}
-        style={({ pressed }) => pressed ? [styles.pressed, styles.button] : styles.button}
+        onPress={handlePress}
+        style={getPressableStyle}
         android_ripple={{ color: '#640233' }}>
         <Text style={styles.text}>{children}</Text>
       </Pressable>

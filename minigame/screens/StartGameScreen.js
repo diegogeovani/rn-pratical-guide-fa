@@ -2,6 +2,17 @@ import { TextInput, View, StyleSheet } from 'react-native'
 
 import PrimaryButton from '../components/PrimaryButton'
 
+const androidContainerStyle = {
+  elevation: 8,
+};
+
+const iosContainerStyle = {
+  shadowColor: 'black',
+  shadowOffset: { width: 0, height: 2 },
+  shadowRadius: 6,
+  shadowOpacity: 0.25,
+};
+
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
@@ -9,18 +20,15 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
     borderRadius: 8,
     padding: 16,
-    backgroundColor: '#3b021F',
-    elevation: 8,
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    shadowOpacity: 0.25,
+    backgroundColor: '#4f021F',
+    ...iosContainerStyle,
+    ...androidContainerStyle,
   },
   input: {
     width: 50,
     height: 50,
-    fontSize: 32,
     marginVertical: 8,
+    fontSize: 32,
     fontWeight: 'bold',
     borderBottomColor: '#ddb52f',
     borderBottomWidth: 2,
@@ -35,7 +43,13 @@ const styles = StyleSheet.create({
 export default function StartGameScreen() {
   return (
     <View style={styles.container}>
-      <TextInput keyboardType='number-pad' autoCapitalize='none' autoCorrect={false} maxLength={2} style={styles.input} />
+      <TextInput
+        keyboardType='number-pad'
+        autoCapitalize='none'
+        autoCorrect={false}
+        maxLength={2}
+        style={styles.input}
+      />
       <View style={styles.buttons}>
         <PrimaryButton>Reset</PrimaryButton>
         <PrimaryButton>Confirm</PrimaryButton>
