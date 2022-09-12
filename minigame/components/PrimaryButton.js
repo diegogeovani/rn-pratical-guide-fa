@@ -34,14 +34,13 @@ const styles = StyleSheet.create({
   },
 })
 
-export default function PrimaryButton({ children }) {
-  const handlePress = () => console.log('press')
+export default function PrimaryButton({ children, onPress }) {
   const getPressableStyle = ({ pressed }) => pressed ? [styles.pressed, styles.button] : styles.button
 
   return (
     <View style={styles.container}>
       <Pressable
-        onPress={handlePress}
+        onPress={onPress}
         style={getPressableStyle}
         android_ripple={{ color: '#640233' }}>
         <Text style={styles.text}>{children}</Text>
