@@ -1,22 +1,14 @@
 import { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+
+import generateRandomBetween from '../common/generateRandomBetween'
 import Title from '../components/Title'
 import Colors from '../constants'
-
-function generateRandomBetween(min, max, exclude) {
-  const rndNum = Math.floor(Math.random() * (max - min)) + min;
-
-  if (rndNum === exclude) {
-    return generateRandomBetween(min, max, exclude);
-  } else {
-    return rndNum;
-  }
-}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
+    padding: 32,
   },
   numberGuess: {
     borderWidth: 4,

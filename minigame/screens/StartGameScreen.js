@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { TextInput, View, StyleSheet, Alert } from 'react-native'
+import { useState } from 'react'
+import { Alert, StyleSheet, TextInput, View } from 'react-native'
 
 import PrimaryButton from '../components/PrimaryButton'
-import Colors from '../constants';
+import Colors from '../constants'
 
 const androidContainerStyle = {
   elevation: 8,

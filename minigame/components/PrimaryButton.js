@@ -4,7 +4,7 @@ import Colors from '../constants'
 
 const androidContainerStyle = {
   elevation: 2,
-};
+}
 
 const iosButtonStyle = {
   shadowColor: 'black',
