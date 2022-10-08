@@ -5,6 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import Colors from './constants'
 import GameScreen from './screens/GameScreen'
 import StartGameScreen from './screens/StartGameScreen'
+import GameOverScreen from './screens/GameOverScreen'
 
 const backgroundImage = require('./assets/images/background.png')
 
@@ -20,10 +21,25 @@ const styles = StyleSheet.create({
 })
 
 export default function App() {
-  const [userNumber, setUserNumber] = useState(null)
+  const [enteredNumber, setNumber] = useState(null)
+  const [isGameOver, setGameOver] = useState(false)
 
   const handleNumberSelection = (number) => {
-    setUserNumber(number)
+    setNumber(number)
+  }
+
+  const handleGameOver = () => {
+    setGameOver(true)
+  }
+
+  let screen = <StartGameScreen onNumberSelect={handleNumberSelection} />
+
+  if (enteredNumber) {
+    screen = <GameScreen enteredNumber={enteredNumber} onGameOver={handleGameOver} />
+  }
+
+  if (isGameOver) {
+    screen = <GameOverScreen />
   }
 
   return (
@@ -34,11 +50,7 @@ export default function App() {
         style={styles.root}
         imageStyle={styles.image}>
         <SafeAreaView style={styles.root}>
-          {
-            userNumber
-              ? <GameScreen />
-              : <StartGameScreen onNumberSelect={handleNumberSelection} />
-          }
+          {screen}
         </SafeAreaView>
       </ImageBackground>
     </LinearGradient>

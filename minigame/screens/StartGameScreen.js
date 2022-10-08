@@ -1,30 +1,17 @@
 import { useState } from 'react'
-import { Alert, StyleSheet, TextInput, View } from 'react-native'
+import { Alert, StyleSheet, Text, TextInput, View } from 'react-native'
+import Card from '../components/Card'
+import InstructionText from '../components/InstructionText'
 
 import PrimaryButton from '../components/PrimaryButton'
+import Title from '../components/Title'
 import Colors from '../constants'
-
-const androidContainerStyle = {
-  elevation: 8,
-};
-
-const iosContainerStyle = {
-  shadowColor: 'black',
-  shadowOffset: { width: 0, height: 2 },
-  shadowRadius: 6,
-  shadowOpacity: 0.25,
-};
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    flex: 1,
     marginTop: 100,
-    marginHorizontal: 24,
-    borderRadius: 8,
-    padding: 16,
-    backgroundColor: Colors.plumb.dark,
-    ...iosContainerStyle,
-    ...androidContainerStyle,
+    alignItems: 'center',
   },
   input: {
     width: 50,
@@ -69,19 +56,23 @@ export default function StartGameScreen({ onNumberSelect }) {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        keyboardType='number-pad'
-        autoCapitalize='none'
-        autoCorrect={false}
-        maxLength={2}
-        onChangeText={handleNumberInput}
-        value={enteredNumber}
-        style={styles.input}
-      />
-      <View style={styles.buttons}>
-        <PrimaryButton onPress={resetNumber}>Reset</PrimaryButton>
-        <PrimaryButton onPress={handleConfirmInput}>Confirm</PrimaryButton>
-      </View>
+      <Title>Guess my number</Title>
+      <Card>
+        <InstructionText>Enter a number</InstructionText>
+        <TextInput
+          keyboardType='number-pad'
+          autoCapitalize='none'
+          autoCorrect={false}
+          maxLength={2}
+          onChangeText={handleNumberInput}
+          value={enteredNumber}
+          style={styles.input}
+        />
+        <View style={styles.buttons}>
+          <PrimaryButton onPress={resetNumber}>Reset</PrimaryButton>
+          <PrimaryButton onPress={handleConfirmInput}>Confirm</PrimaryButton>
+        </View>
+      </Card>
     </View>
   )
 }

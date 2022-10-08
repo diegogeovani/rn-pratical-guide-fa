@@ -15,7 +15,7 @@ const iosButtonStyle = {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     margin: 4,
     borderRadius: 28,
     overflow: 'hidden',
