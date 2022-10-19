@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { ImageBackground, SafeAreaView, StyleSheet } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
+import { useFonts } from 'expo-font'
+import AppLoading from 'expo-app-loading'
 
 import Colors from './constants'
 import GameScreen from './screens/GameScreen'
@@ -23,6 +25,15 @@ const styles = StyleSheet.create({
 export default function App() {
   const [enteredNumber, setNumber] = useState(null)
   const [isGameOver, setGameOver] = useState(false)
+
+  const [fontsLoaded] = useFonts({
+    'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+  })
+
+  if (!fontsLoaded) {
+    return <AppLoading />
+  }
 
   const handleNumberSelection = (number) => {
     setNumber(number)
