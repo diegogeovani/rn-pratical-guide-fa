@@ -10,7 +10,7 @@ import Colors from '../constants'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 100,
+    padding: 32,
     alignItems: 'center',
   },
   input: {
@@ -38,7 +38,6 @@ export default function StartGameScreen({ onNumberSelect }) {
 
   const handleConfirmInput = () => {
     const number = parseInt(enteredNumber, 10);
-    console.log(number)
     if (Number.isNaN(number) || number <= 0 || number > 99) {
       Alert.alert(
         'Invalid number!',

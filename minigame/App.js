@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
 export default function App() {
   const [enteredNumber, setNumber] = useState(null)
   const [isGameOver, setGameOver] = useState(false)
+  const [roundsNumber, setRoundsNumber] = useState(0)
 
   const [fontsLoaded] = useFonts({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
@@ -39,8 +40,15 @@ export default function App() {
     setNumber(number)
   }
 
-  const handleGameOver = () => {
+  const handleGameOver = (numberOfRounds) => {
     setGameOver(true)
+    setRoundsNumber(numberOfRounds)
+  }
+
+  const handleStartNewGame = () => {
+    setNumber(null)
+    setGameOver(false)
+    setRoundsNumber(0)
   }
 
   let screen = <StartGameScreen onNumberSelect={handleNumberSelection} />
@@ -49,8 +57,8 @@ export default function App() {
     screen = <GameScreen enteredNumber={enteredNumber} onGameOver={handleGameOver} />
   }
 
-  if (isGameOver) {
-    screen = <GameOverScreen />
+  if (isGameOver && enteredNumber) {
+    screen = <GameOverScreen userNumber={enteredNumber} rounds={roundsNumber} onNewGameClick={handleStartNewGame} />
   }
 
   return (
