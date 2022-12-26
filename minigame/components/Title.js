@@ -1,8 +1,9 @@
 import { StyleSheet, Text } from 'react-native'
-import Colors from '../constants'
 
 const styles = StyleSheet.create({
   title: {
+    width: 300,
+    maxWidth: '80%',
     fontFamily: 'open-sans-bold',
     fontSize: 24,
     color: 'white',

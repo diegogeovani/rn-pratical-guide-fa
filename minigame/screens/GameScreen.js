@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Alert, FlatList, StyleSheet, Text, View } from 'react-native'
+import { Alert, Dimensions, FlatList, StyleSheet, Text, View } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
 import generateRandomBetween from '../common/generateRandomBetween'
@@ -10,16 +10,19 @@ import Colors from '../constants'
 import InstructionText from '../components/InstructionText'
 import GuessLogItem from '../components/GuessLogItem'
 
+const deviceWidth = Dimensions.get('window').width
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 32,
+    alignItems: 'center',
   },
   numberGuess: {
     borderWidth: 4,
     borderColor: Colors.secondary,
-    padding: 24,
-    margin: 24,
+    padding: deviceWidth < 380 ? 12 : 24,
+    margin: deviceWidth < 380 ? 12 : 24,
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
@@ -27,7 +30,7 @@ const styles = StyleSheet.create({
   numberGuessText: {
     fontWeight: 'bold',
     color: Colors.secondary,
-    fontSize: 36,
+    fontSize: deviceWidth < 380 ? 28 : 36,
   },
   instructionText: {
     marginBottom: 12,

@@ -1,5 +1,7 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Dimensions } from 'react-native'
 import Colors from '../constants'
+
+const deviceWidth = Dimensions.get('window').width
 
 const androidContainerStyle = {
   elevation: 8,
@@ -15,7 +17,7 @@ const iosContainerStyle = {
 const styles = StyleSheet.create({
   inputContainer: {
     alignItems: 'center',
-    marginTop: 36,
+    marginTop: deviceWidth < 380 ? 18: 36,
     marginHorizontal: 24,
     borderRadius: 8,
     padding: 16,
