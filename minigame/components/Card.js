@@ -17,7 +17,7 @@ const iosContainerStyle = {
 const styles = StyleSheet.create({
   inputContainer: {
     alignItems: 'center',
-    marginTop: deviceWidth < 380 ? 18: 36,
+    marginTop: deviceWidth < 380 ? 18 : 36,
     marginHorizontal: 24,
     borderRadius: 8,
     padding: 16,
