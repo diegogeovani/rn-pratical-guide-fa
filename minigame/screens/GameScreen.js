@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Alert, Dimensions, FlatList, StyleSheet, Text, View } from 'react-native'
+import { Alert, Dimensions, FlatList, StyleSheet, Text, View, useWindowDimensions } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
 import generateRandomBetween from '../common/generateRandomBetween'
@@ -32,6 +32,10 @@ const styles = StyleSheet.create({
     color: Colors.secondary,
     fontSize: deviceWidth < 380 ? 28 : 36,
   },
+  buttonsContainerWide: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
   instructionText: {
     marginBottom: 12,
   },
@@ -58,6 +62,7 @@ let maxBoundary = 100
 export default function GameScreen({ enteredNumber, onGameOver }) {
   const [currentGuess, setCurrentGuess] = useState(0)
   const [roundsLogs, setRoundsLogs] = useState([])
+  const { width } = useWindowDimensions()
 
   const numberOfRounds = roundsLogs.length
 
@@ -91,9 +96,8 @@ export default function GameScreen({ enteredNumber, onGameOver }) {
     setRoundsLogs((prevRoundsLogs) => [newGuess, ...prevRoundsLogs])
   }
 
-  return (
-    <View style={styles.container}>
-      <Title>Opponent's guess</Title>
+  let content = (
+    <>
       <NumberGuess>{currentGuess}</NumberGuess>
       <Card>
         <InstructionText style={styles.instructionText}>Higher or lower?</InstructionText>
@@ -106,6 +110,30 @@ export default function GameScreen({ enteredNumber, onGameOver }) {
           </PrimaryButton>
         </View>
       </Card>
+    </>
+  )
+
+  if (width > 500) {
+    content = (
+      <>
+        <View style={styles.buttonsContainerWide}>
+          <PrimaryButton onPress={() => handleNextGuess('lower')}>
+            <Ionicons name="md-remove" size={23} color="white" />
+          </PrimaryButton>
+          <NumberGuess>{currentGuess}</NumberGuess>
+          <PrimaryButton onPress={() => handleNextGuess('greater')}>
+            <Ionicons name="md-add" size={23} color="white" />
+          </PrimaryButton>
+        </View>
+      </>
+    )
+  }
+  width
+
+  return (
+    <View style={styles.container}>
+      <Title>Opponent's guess</Title>
+      {content}
       <View style={styles.list}>
         <FlatList
           data={roundsLogs}
