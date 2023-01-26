@@ -6,10 +6,10 @@ const styles = StyleSheet.create({
     maxWidth: '80%',
     fontFamily: 'open-sans-bold',
     fontSize: 24,
-    color: 'white',
+    color: 'grey',
     textAlign: 'center',
     borderWidth: 2,
-    borderColor: 'white',
+    borderColor: 'grey',
     padding: 8,
   },
 })
