@@ -28,21 +28,21 @@ const renderItem = ({ item }) => (
     price={item.price} />
 )
 
-const AddExpenseButton = () => {
-  const navigation = useNavigation()
-  const openAddScreen = () => navigation.navigate(AddExpenseScreen.name)
-
-  return (
-    <IconButton name="add" color={colors.white} onPress={openAddScreen} />
-  )
-}
+const AddExpenseButton = ({ onPress }) => (
+  <IconButton name="add" color={colors.white} onPress={onPress} />
+)
 
 const MainContent = ({ navigation }) => {
+  const openAddExpenseScreen = () => {
+    navigation.navigate(AddExpenseScreen.name)
+  }
+
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: AddExpenseButton
+      headerRight: () => AddExpenseButton({ onPress: openAddExpenseScreen })
     })
   }, [navigation])
+
 
   return (
     <View style={styles.container}>
