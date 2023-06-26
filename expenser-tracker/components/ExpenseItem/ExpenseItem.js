@@ -9,7 +9,7 @@ export default function ExpenseItem({ name, date, price }) {
       {/* <Pressable> */}
       <View style={{ flexGrow: 1, flexShrink: 1 }}>
         <Text>{name}</Text>
-        <Text>{date}</Text>
+        <Text>{date.toISOString()}</Text>
       </View>
       <View style={{ flexBasis: 96, justifyContent: 'center' }}>
         <Text>{price}</Text>

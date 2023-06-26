@@ -1,3 +1,4 @@
 export default Object.freeze({
-  white: 'white'
+  white: 'white',
+  greyNeutral: '#eee'
 })
